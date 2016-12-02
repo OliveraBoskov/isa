@@ -1,0 +1,5 @@
+package entity;
+
+public enum UserType {
+	GUEST, RESTAURANT_MANAGER, SYSTEM_MANAGER, BARTENDER, SHEF, WAITER
+}

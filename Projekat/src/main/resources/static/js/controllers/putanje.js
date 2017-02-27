@@ -55,6 +55,21 @@ con.config(function($routeProvider) {
    .when("/logovanje", {
         templateUrl : "views/logovanje.html"
    })
+   .when("/kreirajRezervaciju", {
+        templateUrl : "views/rezervacija.html"
+   })
+    .when("/listaRestorana", {
+        templateUrl : "views/restorani.html"
+   })
+   .when("/listaPrijatelja", {
+        templateUrl : "views/prijatelji.html"
+   })
+    .when("/profil", {
+        templateUrl : "views/profil.html"
+   })
+    .when("/izlogujSe", {
+        templateUrl : "views/loginZaSve.html"
+   })
    .when("/listaSaNamirnicama", {
         templateUrl : "views/listaSaNamirnicama.html"
         	

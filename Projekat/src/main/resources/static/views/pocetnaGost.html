@@ -1,1 +1,79 @@
-pocetna za gosta
+<div ng-controller="gostPocetnaKontroler">
+
+<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" >Gost : {{ime}}</a>
+		</div>
+		
+		<md-menu-bar>
+		
+		<!-- REZERVACIJA -->
+		
+          <md-menu>
+                
+                <button ng-click="$mdOpenMenu()" aria-label="Open sample menu">
+              		Rezervacije
+                </button>
+                <md-menu-content width="6" id="messages">
+                    <md-menu-item md-menu-origin md-menu-align-target>
+                    	<md-button id="kreirajRezervaciju">
+                      		 Kreiraj rezervaciju
+                   		 </md-button>
+                    </md-menu-item>
+				 </md-menu-content>
+            </md-menu>
+            
+           <!-- RESTORANI -->
+           
+              <md-menu>
+                
+                <button ng-click="$mdOpenMenu()" aria-label="Open sample menu">
+              		Restorani
+                </button>
+                <md-menu-content width="6" id="messages">
+                    <md-menu-item md-menu-origin md-menu-align-target ><md-button id="listaRestorana">
+                       Lista restorana
+                    </md-button></md-menu-item>
+				 </md-menu-content>
+            </md-menu>
+            
+            <!-- PRIJATELJI -->
+            
+              <md-menu>
+                
+                <button ng-click="$mdOpenMenu()" aria-label="Open sample menu">
+              		Prijatelji
+                </button>
+                <md-menu-content width="6" id="messages">
+                    <md-menu-item md-menu-origin md-menu-align-target ><md-button id="listaPrijatelja">
+                      Lista prijatelja
+                    </md-button></md-menu-item>
+				 </md-menu-content>
+            </md-menu>
+            
+            <!-- PROFIL -->
+            
+              <md-menu>
+                
+                <button ng-click="$mdOpenMenu()" aria-label="Open sample menu">
+              		Profil
+                </button>
+                <md-menu-content width="6" id="messages">
+                    <md-menu-item md-menu-origin md-menu-align-target ><md-button id="profil">
+                      Vidi Profil
+                    </md-button></md-menu-item>
+                    
+                     <md-menu-item md-menu-origin md-menu-align-target ><md-button id="izlogujSe">
+                      Izloguj se
+                    </md-button></md-menu-item>
+				 </md-menu-content>
+				 
+				 
+                   
+				 
+            </md-menu>
+   
+      </md-menu-bar>	
+</nav>
+
+</div>

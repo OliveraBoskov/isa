@@ -1,0 +1,57 @@
+<div ng-controller="rezervacijaKontroler">	
+		
+<h1> Restoran: </h1>
+
+	<p class="form-group" style="width: 200">
+    	<label style="color: black;">Nadji po imenu:</label>
+    	<input type="text" ng-model="nadjiPoImenu" class="form-control">
+  	</p>
+  		
+  	<p class="form-group"  style="width: 200">
+    	<label style="color: black;">Nadji po tipu:</label>
+    	<input type="text" ng-model="nadjiPoTipu" class="form-control">
+  	</p>	
+  	
+  	<md-select ng-change="nadjiSveRestorane()" placeholder="Nadji restoran" ng-model="selektujRestoran" style="min-width: 200px; color: white;">
+      		<md-option ng-value="restoran" ng-repeat="restoran in restorani">{{restoran.ime}} ({{restoran.tip}})</md-option>
+	</md-select>
+	<!-- (filteredRestaurants = restorani | filter:{ime:nadjiPoImenu} | filter:{tip:nadjiPoTipu})) -->
+	
+	<label style="color: white"> Zelim da dodjem: </label>
+		<p class="input-group" style="width: 150"> 	
+          	<input type="text" class="form-control" uib-datepicker-popup ng-model="vremeDolaska" is-open="vremeDolaskaOtvori" ng-changed="vremePromeni(vremeDolaska)" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+          	<span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="otvoriVremeDolaska()"><i class="glyphicon glyphicon-calendar"></i></button>
+          	</span>
+        </p>
+    
+    
+	<div uib-timepicker ng-model="vremeDolaskaVreme" ng-change="vremeDolaskaVreme()" hour-step="hstep" minute-step="mstep" show-meridian="false"></div>
+		
+		
+	<p class="input-group">	
+		<label style="color: white"> Zelim da ostanem: </label>
+		<input type="number" class="form-control" ng-model="ostajemSati" min="1" max="10">
+	</p>
+	
+	<h1> Odaberite sto koji zelite da rezervisete </h1>
+	
+	<canvas id="canvas" width="500" height="450" style="border:1px solid #000000"></canvas>
+  		
+  	<h1> Pozovite prijatelje </h1>
+  	
+  	<md-select ng-model="selektovanPrijatelj" multiple="" placeholder="Pozovi prijatelja">
+          <md-optgroup label="Prijatelji">
+          	<md-option ng-value="prijateljstvo.secondUserFS" ng-repeat="prijatelj in prijateljstvo">{{prijatelj.secondUserFS.ime}} {{prijatelj.secondUserFS.prezime}}</md-option>
+          </md-optgroup>
+    </md-select>
+       
+     <div ng-repeat="p in selektovanPrijatelj">
+        <p style="color: white;">
+        	{{p.ime}} {{p.prezime}}
+        </p>
+     </div>
+     
+     <button class="md-raised md-primary" ng-click="dodajRezervaciju()">Kreiraj Rezervaciju</button>
+     
+ </div>

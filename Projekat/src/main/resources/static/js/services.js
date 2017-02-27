@@ -496,9 +496,6 @@ angular.module('Model').factory('stoService' , function stoService($http){
 			url: '/api/restoran/uzmiSto/' + restoranId +'/'+broj
 		});
 	}
-	
-
-	
 	return stoService;
 });
 
@@ -614,11 +611,55 @@ angular.module('Model').factory('namirniceService' , function namirniceService($
 	}
 	
 	namirniceService.aktivnaKategorija = {};
-	
-	
-	
 	return namirniceService;
 	
 });
+
+
+angular.module('Model').factory('rezervacijaService' , function rezervacijaService($http){
+	
+	rezervacijaService.dodajRezervaciju = function(gostId, restoranId, sto, vremeDolaska, vremeOdlaska){
+		return $http({
+			method: 'POST',
+			url: 'api/rezervacija/dodajRezervaciju',
+			data: {
+				"id" : null,
+				"gostId" : gostId,
+				"restoranId" : restoranId,
+				"sto" : sto,
+				"vremeDolaska" : vremeDolaska,
+				"vremeOdlaska" : vremeOdlaska
+			}
+			
+		});
+	}
+	
+	rezervacijaService.getRezervacijaByGostIdAndVremeDolaska= function(gostId, vremeDolaska){
+		
+		return $http ({
+			method: 'GET',
+			url: 'api/rezervacija/getByGostIdAndVremeDolaska/' + gostId +'/'+vremeDolaska
+		});
+	}
+	
+	rezervacijaService.otkaziRezervaciju = function(id){
+		return $http ({
+			method: 'POST',
+			url: 'api/rezervacija/otkaziRezervaciju/' + id
+		});
+	}
+	
+	rezervacijaService.getSveTermRezervacije = function(id){
+		return $http ({
+			method: 'GET',
+			url: 'api/rezervacija/getSveTermRezervacije/' + id
+		});
+	}
+	
+	return rezervacijaService;
+});
+
+
+
 
 

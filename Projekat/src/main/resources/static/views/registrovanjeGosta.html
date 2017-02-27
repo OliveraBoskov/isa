@@ -1,0 +1,36 @@
+<div ng-controller="registrovanjeGostaController">
+  <h4>Kreiraj svoj nalog!</h4>
+  
+  <p class="form-group">
+    <label>Unesi svoje ime: </label>
+    <input type="text" ng-model="ime" class="form-control" ng-change="change()"/>
+  </p>
+  
+  <p class="form-group">
+    <label>Unesi svoje prezime: </label>
+    <input type="text" class="form-control" ng-model="prezime" ng-change="change()"/>
+  </p>
+  
+  <p class="form-group">
+    <label>Unesi svoju email adresu: </label>
+    <input type="email" class="form-control" ng-model="email" ng-change="change()"/>
+  </p>
+  
+  <p class="form-group">
+    <label>Unesi lozinku: </label>
+    <input type="password" class="form-control" ng-model="lozinka1" ng-change="change()"/>
+  </p>
+    
+  <p class="form-group">
+    <label>Ponovi lozinku: </label>
+    <input type="password" class="form-control" ng-model="lozinka2" ng-change="change()"/>
+  </p>
+  
+  <p ng-show="(lozinka1!=lozinka2)" class="help-block" style="color: red">Lozinke se ne poklapaju!</p>
+  
+  
+  <button type="button" class="btn btn-sm btn-info" ng-click="regisrovanje()"> Kreiraj</button>
+<!-- ng-disabled="enableOrDisable" -->
+  
+  <button type="button" class="btn btn-sm btn-info" ng-click="logovanje()">Logovanje</button>
+</div>

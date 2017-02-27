@@ -1,0 +1,99 @@
+<div ng-controller="listaSaNamirnicamaKontroler"> 
+
+<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" ></a>
+		</div>
+		
+		<md-menu-bar>
+             <md-menu>
+                <!-- Trigger element is a md-button with an icon -->
+                <button ng-click="$mdOpenMenu()" aria-label="Open sample menu">
+              		Dodaj
+                </button>
+                <md-menu-content width="6" id="messages">
+                    <md-menu-item md-menu-origin md-menu-align-target ><md-button id="dodajKategoriju">
+                    	Kategorija
+                    </md-button></md-menu-item>
+				 </md-menu-content>
+            </md-menu>
+            
+      </md-menu-bar>	
+</nav>
+
+<!-- SVE KATEGORIJE SA NAMIRNICAMA -->
+
+<h2> Lista sa svim namirnicama: </h2>
+
+<md-list ng-repeat = "kategorija in kategorije">
+ 			<md-subheader style="background-color:black; color:white; opacity:0.3;" class="md-no-sticky"> {{kategorija.imeKategorije}} 
+ 		
+ 			<md-icon ng-init md-svg-src="slike/add.svg" ng-click="dodajNamirnicu(kategorija)" aria-label="Add Groceries" class="md-secondary md-hue-3" >
+ 			</md-icon>
+ 		
+ 			</md-subheader>
+ 		
+ 		
+ 			<md-list-item ng-repeat="namirnica in kategorija.namirnice" ng-click="" class="noright">
+    			
+    			<p style="color:black"> {{namirnica.imeNamirnice}}</p>
+    		
+    			<md-icon ng-init md-svg-src="slike/add.svg" ng-click="dodajNamirnicuLista(namirnica)" aria-label="Edit Drink" class="md-secondary md-hue-3" ></md-icon>
+  			
+  			</md-list-item>
+ 		
+ 		</md-list>
+ 	 
+<!-- PORUDZBINA -->
+
+<h2> Porudzbina: </h2>	
+	<md-list>
+ 			<md-subheader class="md-no-sticky"> Lista porucenog
+ 		
+ 			</md-subheader>
+ 		
+ 		
+ 			<md-list-item ng-repeat="namir in namirnicaLista" ng-click="" class="noright">
+    			
+    			<p style="color:black"> {{namir.imeNamirnice}} {{namir.brojac}}</p>
+    		
+  				<md-icon md-svg-src="slike/obrisi.svg" ng-click="obrisiIzListe(namir)" aria-label="Obrisi namirnicu" class="md-secondary md-hue-3" ></md-icon>
+  			
+  			</md-list-item>
+ 		
+ 		</md-list>
+ 		
+ 		<p class="form-group"  style="width: 200">
+    		<label>Naziv porudzbine:</label>
+    		<input type="text" ng-model="listaIme" class="form-control">
+  		</p>
+ 		
+ 		
+ 		<label style="color: white"><b>Vreme pocetka:</b></label>
+		<p class="input-group" style="width: 150"> 	
+          	<input type="text" class="form-control" uib-datepicker-popup ng-model="vremePocetka" is-open="vremePocetkaOtvori" ng-changed="" datepicker-options="vremePocetkaOpcije" ng-required="true" close-text="Close" />
+          	<span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="vremePocetkaOtv()"><i class="glyphicon glyphicon-calendar"></i></button>
+          	</span>
+        </p>
+        
+		 <div uib-timepicker ng-model="vremePocetkaVreme" ng-change="vremePocetkaPromene()" hour-step="hstep" minute-step="mstep" show-meridian="false"></div>
+	
+	
+		<label style="color: white"><b>Vreme zavrsetka:</b></label>
+		<p class="input-group" style="width: 150"> 	
+          	<input type="text" class="form-control" uib-datepicker-popup ng-model="vremeZavrsetka" is-open="vremeZavrsetkaOtvori" ng-changed="dateChanged(comingDate)" datepicker-options="endingDateOptions" ng-required="true" close-text="Close" />
+          	<span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="otvoriVremeZavrsetka()"><i class="glyphicon glyphicon-calendar"></i></button>
+          	</span>
+        </p>
+        
+		<div uib-timepicker ng-model="vremeZavrsetkaVreme" ng-change="vremeZavrsetkaPromeni()" hour-step="ehstep" minute-step="emstep" show-meridian="false"></div>
+	
+		<md-button class="md-raised md-primary" ng-click="potvrdi()">Potvrdi</md-button>
+		
+ 		
+	
+  	
+	</div>
+	

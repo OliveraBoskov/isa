@@ -1,0 +1,27 @@
+ <div ng-controller="jelovnikKontroler">
+ <h1> Jelovnik </h1>
+ 
+ <button type="button" class="btn btn-sm btn-info" ng-click="dodajKategoriju()"> Dodaj kategoriju </button>
+ 
+ 
+ <md-list ng-repeat = "kategorija in kategorije">
+ 		<md-subheader style="background-color:black; color:white; opacity:0.3;" class="md-no-sticky"> {{kategorija.imeKategorije}} 
+ 		
+ 			<md-icon ng-init md-svg-src="slike/add.svg" ng-click="dodajJelo(kategorija)" aria-label="" class="md-secondary md-hue-3" >
+ 			</md-icon>
+ 		
+ 		</md-subheader>
+ 		
+ 		
+ 		<md-list-item ng-repeat="jelo in kategorija.jela" ng-click="goToRestaurant(restaurant, $event)" class="noright">
+    		<img alt="" class="md-avatar" />
+    		<p style="color:black"> {{jelo.imeJela}}</p>
+    		
+    		<md-icon ng-init md-svg-src="slike/pencil.svg" ng-click="izmeniJelo($event, kategorija, jelo)" aria-label="" class="md-secondary md-hue-3" ></md-icon>
+  			
+  			
+  		</md-list-item>
+ 		
+ 	</md-list>
+ 
+ </div>

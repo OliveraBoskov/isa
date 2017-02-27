@@ -1,0 +1,20 @@
+<div ng-controller="logovanjeZaposleniController">
+  <h4>Logovanje</h4>
+  <p class="form-group">
+    <label>Unesi email adresu: </label>
+    <input type="text" ng-model="emailZaposleni" class="form-control">
+  </p>
+  
+  <p class="form-group">
+    <label>Unesi lozinku: </label>
+    <input type="text" class="form-control" ng-model="lozinkaZaposleni" />
+  </p>
+  
+  <br>
+  
+  <label ng-style="pokaziSe" style="color: red"> Ne postoji korisnik sa tim email-om. </label>
+  
+  
+  <button type="button" class="btn btn-sm btn-info" ng-click="logZaposleni()">Uloguj se!</button>
+ 
+</div>

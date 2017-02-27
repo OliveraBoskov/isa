@@ -1,0 +1,21 @@
+<h2 style="color:black" >Dodaj jelo!</h2>
+
+  <p class="form-group">
+    <label>Unesi ime jela: </label>
+    <input type="text" class="form-control" ng-model="ime" required/>
+  </p>
+  
+   <p class="form-group">
+    <label>Unesi opis jela: </label>
+    <input type="text" class="form-control" ng-model="opis" required/>
+  </p> 
+ 
+ 
+    <p class="form-group">
+    <label>Unesi cenu jela: </label>
+    <input type="text" class="form-control" ng-model="cena" required/>
+  </p> 
+  
+   
+  <button type="button" class="btn btn-sm btn-info" ng-click="dodajJelo()"> Kreiraj</button>
+  <button type="button" class="btn btn-sm btn-info" ng-click="zatvoriDijalog()"> Zatvori</button>

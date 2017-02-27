@@ -1,0 +1,119 @@
+<div ng-controller="menadzerPocetnaController">
+<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" >Menadzer : {{ime}}</a>
+		</div>
+		
+		<md-menu-bar>
+            
+            <md-menu>
+                <!-- Trigger element is a md-button with an icon -->
+                <button ng-click="$mdOpenMenu()" aria-label="Open sample menu">
+              		Dodaj zaposlenog
+                </button>
+                <md-menu-content width="6" id="messages">
+                    <md-menu-item md-menu-origin md-menu-align-target ><md-button id="dodajKonobara">
+                       Dodaj konobara
+                    </md-button></md-menu-item>
+
+                    <md-menu-item><md-button id="dodajKuvara">
+                        Dodaj kuvara
+                    </md-button></md-menu-item>
+
+                    <md-menu-item><md-button id="dodajSankera">
+                     	Dodaj sankera
+                    </md-button></md-menu-item>
+
+                    <md-menu-item><md-button id="dodajPonudjaca">
+                       Dodaj ponudjaca
+                    </md-button></md-menu-item>
+
+                </md-menu-content>
+            </md-menu>
+            
+            
+            <md-menu>
+                <!-- Trigger element is a md-button with an icon -->
+                <button ng-click="$mdOpenMenu()" aria-label="Open sample menu">
+              		Dodaj meni
+                </button>
+                <md-menu-content width="6" id="messages">
+                    <md-menu-item md-menu-origin md-menu-align-target ><md-button id="dodajJelovnik">
+                       Dodaj jelovnik
+                    </md-button></md-menu-item>
+
+                    <md-menu-item><md-button id="dodajKartuPica">
+                        Dodaj kartu pica
+                    </md-button></md-menu-item>
+
+
+                </md-menu-content>
+            </md-menu>
+            
+            <md-menu>
+                <!-- Trigger element is a md-button with an icon -->
+                <button ng-click="$mdOpenMenu()" aria-label="Open sample menu">
+              		Dodaj sto
+                </button>
+                <md-menu-content width="6" id="messages">
+                    <md-menu-item md-menu-origin md-menu-align-target ><md-button id="dodajUnutrasnjiSto">
+                        Dodaj sto(Unutra)
+                    </md-button></md-menu-item>
+
+                    <md-menu-item><md-button id="nePusenjeSto">
+                     	Dodaj sto za nepusace
+                    </md-button></md-menu-item>
+
+                    <md-menu-item><md-button id="dodajBastaZatvorena">
+                       Dodaj sto u basti (zatvorena)
+                    </md-button></md-menu-item>
+                    
+                    <md-menu-item><md-button id="dodajBastaOtvorena">
+                       Dodaj sto u basti (zatvorena)
+                    </md-button></md-menu-item>
+                    
+                    <md-menu-item><md-button id="sacuvajKonfiguraciju">
+                       Sacuvaj konfiguraciju
+                    </md-button></md-menu-item>
+
+                </md-menu-content>
+            </md-menu>
+            
+            <md-menu>
+                <!-- Trigger element is a md-button with an icon -->
+                <button ng-click="$mdOpenMenu()" aria-label="Open sample menu">
+              		Raspored
+                </button>
+                <md-menu-content width="6" id="messages">
+                    <md-menu-item md-menu-origin md-menu-align-target ><md-button id="vidiKalendar">
+                       Vidi kalendar
+                    </md-button></md-menu-item>
+				 </md-menu-content>
+            </md-menu>
+            
+             <md-menu>
+                <!-- Trigger element is a md-button with an icon -->
+                <button ng-click="$mdOpenMenu()" aria-label="Open sample menu">
+              		Namirnice
+                </button>
+                <md-menu-content width="6" id="messages">
+                    <md-menu-item md-menu-origin md-menu-align-target ><md-button id="vidiListu">
+                     Lista sa namirnicama
+                    </md-button></md-menu-item>
+				 </md-menu-content>
+            </md-menu>
+            
+      </md-menu-bar>	
+</nav>
+
+
+<h1> Restoran: {{imeRestoran}} </h1>
+
+<label> Opis: {{opisRestoran}} </label>
+
+<button type="button" class="btn btn-sm btn-info" ng-click="izmeniPodatke()"> Izmeni</button>
+<br>
+<h1> Konfiguracija sedenja</h1>
+ <canvas id="canvas" width="500" height="450" style="border:1px solid #000000"></canvas>
+	
+</div>

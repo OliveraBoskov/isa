@@ -1,0 +1,53 @@
+<div flex="40" ng-controller = "registrovanjeKuvaraController" >
+<h4>Kreiraj nalog za kuvara!</h4>
+  
+  <p class="form-group">
+    <label>Unesi ime: </label>
+    <input type="text" ng-model="ime" class="form-control" required/>
+  </p>
+  
+  <p class="form-group">
+    <label>Unesi prezime: </label>
+    <input type="text" ng-model="prezime" class="form-control" required/>
+  </p>
+  
+   <p class="form-group">
+    <label>Unesi Email: </label>
+    <input type="text" ng-model="email" class="form-control" required/>
+  </p>
+  
+  <p class="form-group">
+    <label>Unesi lozinku: </label>
+    <input type="text" ng-model="lozinka1" class="form-control" required/>
+  </p>
+  
+  <p class="form-group">
+    <label>Ponovi lozinku: </label>
+    <input type="text" ng-model="lozinka2" class="form-control" required/>
+  </p>
+<!--   
+  <p class="form-group">
+    <label>Unesi datum rodjenja: </label>
+    <input type="text" ng-model="datumRodjenja" class="form-control" required/>
+  </p> -->
+  
+  
+<p class="form-group">
+            <label>Unesi datum rodjenja:</label>
+            <md-datepicker ng-model="datumRodjenja"></md-datepicker>
+</p>
+
+  <p class="form-group">
+    <label>Unesi konferekcijski broj: </label>
+    <input type="text" ng-model="konfBroj" class="form-control" required/>
+  </p>
+  
+  <p class="form-group">
+  	 <label>Unesi velicinu obuce: </label>
+    <input type="text" ng-model="velicinaObuce" class="form-control" required/>
+  </p>
+
+   <hr/>
+<button type="button" class="btn btn-sm btn-info" ng-click="dodajKuvara()"> Kreiraj kuvara</button>
+
+</div>

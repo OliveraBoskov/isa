@@ -1,0 +1,27 @@
+ <div ng-controller="kartaPicaKontroler">
+ <h1> Karta Pica </h1>
+ 
+ <button type="button" class="btn btn-sm btn-info" ng-click="dodajKategoriju()"> Dodaj kategoriju </button>
+ 
+ 
+ <md-list ng-repeat = "kategorija in kategorije">
+ 		<md-subheader style="background-color:black; color:white; opacity:0.3;" class="md-no-sticky"> {{kategorija.imeKategorije}} 
+ 		
+ 			<md-icon ng-init md-svg-src="slike/add.svg" ng-click="dodajKartuPica(kategorija)" aria-label="" class="md-secondary md-hue-3" >
+ 			</md-icon>
+ 		
+ 		</md-subheader>
+ 		
+ 		
+ 		<md-list-item ng-repeat="pice in kategorija.pica" ng-click="goToRestaurant(restaurant, $event)" class="noright">
+    		<img alt="" class="md-avatar" />
+    		<p style="color:black"> {{pice.imePica}}</p>
+    		
+    		<md-icon ng-init md-svg-src="slike/pencil.svg" ng-click="izmeniPice($event, kategorija, pice)" aria-label="" class="md-secondary md-hue-3" ></md-icon>
+  			
+  			
+  		</md-list-item>
+ 		
+ 	</md-list>
+ 
+ </div>

@@ -1,0 +1,41 @@
+<div ng-controller="kalendarKontroler"> 
+
+<mwl-calendar
+    view="kalendar"
+    view-date="datum"
+    events="events"
+    view-title="calendarTitle"
+    on-event-click="eventClicked(calendarEvent)"
+    on-event-times-changed="calendarEvent.pocinjeU = calendarNewEventStart; calendarEvent.zavrsavaU = calendarNewEventEnd"
+    cell-is-open="true">
+    
+</mwl-calendar>
+
+	<label style="color: white"> Smena pocinje: </label>
+		<p class="input-group" style="width: 150"> 	
+          	<input type="text" class="form-control" uib-datepicker-popup ng-model="smenaPocetak" is-open="smenaPocetakOtvori" ng-changed="datumPocetak(smenaPocetak)" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+          	<span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="otvoriSmenuPocetak()"><i class="glyphicon glyphicon-calendar"></i></button>
+          	</span>
+        </p>
+        
+		 <div uib-timepicker ng-model="smenaPocetakVreme" ng-change="promeniSmenuPocetak()" hour-step="hstep" minute-step="mstep" show-meridian="false"></div>
+		
+		
+		<p class="input-group">	
+		<label style="color: white"> Smena traje: </label>
+			<input type="number" class="form-control" ng-model="smenaSati" min="1" max="10">
+		</p>
+		
+		<md-select ng-change="" placeholder="Izaberi zaposlenog" ng-model="selektovanZaposleni" style="min-width: 200px; color: white;">
+      		<md-option ng-value="zaposlen" ng-repeat="zaposlen in zaposleni">{{zaposlen.ime}} {{zaposlen.prezime}} ({{zaposlen.tip}})</md-option>
+		</md-select>
+		
+		<md-select ng-change="" placeholder="Izaberi region" ng-model="selektovanReon" style="min-width: 200px; color: white;">
+      		<md-option ng-value="reon" ng-repeat="reon in reoni">{{reon.ime}}</md-option>
+		</md-select>
+		
+		<md-button class="md-raised md-primary" ng-click="dodajSmenu()">Dodaj smenu</md-button>
+		
+
+</div>

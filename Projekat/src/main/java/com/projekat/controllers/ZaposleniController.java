@@ -51,5 +51,26 @@ public class ZaposleniController {
 	    	Collection<Zaposleni> sviZaposleni = zaposleniService.nadjiSveZaposleneURestoranu(id);
 	    	return new ResponseEntity<Collection<Zaposleni>>(sviZaposleni, HttpStatus.OK);
 	    }
+	 
+	 
+		@RequestMapping(
+	            value    = "/api/korisnik/promene/{ime}/{prezime}/{konfBroj}/{velicinaObuce}/{email:.+}",
+	            method   = RequestMethod.POST,
+	            produces = MediaType.APPLICATION_JSON_VALUE
+	    )
+	    public ResponseEntity<Integer> promene(@PathVariable String ime, @PathVariable String prezime, @PathVariable String konfBroj, @PathVariable Integer velicinaObuce, @PathVariable String email) {
+			Integer i = zaposleniService.promeni(ime, prezime, konfBroj, velicinaObuce, email);
+	        return new ResponseEntity<Integer>(i, HttpStatus.OK);
+	    }
+		
+		@RequestMapping(
+	            value    = "/api/korisnik/prvoLogovanje/{email:.+}/{prviPut}/{novaLozinka}",
+	            method   = RequestMethod.POST,
+	            produces = MediaType.APPLICATION_JSON_VALUE
+	    )
+	    public ResponseEntity<Integer> prvoLogovanje(@PathVariable String email, @PathVariable Integer prviPut, @PathVariable String novaLozinka) {
+			Integer i = zaposleniService.prvoLogovanje(email, prviPut, novaLozinka);
+	        return new ResponseEntity<Integer>(i, HttpStatus.OK);
+	    }
 
 }

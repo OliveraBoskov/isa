@@ -87,9 +87,15 @@ con.controller('logovanjeZaposleniController',['$scope','$location','registrovan
 						$location.path("/menadzerPocetna");
 					}else if(response.data.tip == "ponudjac"){
 						$location.path("/ponudjac");
+					}else if(response.data.tip == "konobar"){
+						$location.path("/konobar");
+					}else if(response.data.tip == "kuvar"){
+						$location.path("/kuvar");
+					}else if(response.data.tip == "sanker"){
+						$location.path("/sanker");
 					}else{
 						
-						$location.path("/pocetnaGost");
+						$location.path("/logovanje");
 						
 					}
 					

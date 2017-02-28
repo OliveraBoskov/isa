@@ -43,6 +43,17 @@ public class ZaposleniService {
 		Collection<String> tipovi = tipoviKojiNeOdgovaraju;
 		return zaposleniRepository.findByRestoranAndTipNotIn(restoran, tipovi);
 	}
+	
+	public Integer promeni(String ime, String prezime, String konfBroj, Integer velicinaObuce, String email) {
+		return zaposleniRepository.setImePrezimeKonfBrojVelicinaObuceForZaposleni(ime, prezime, konfBroj, velicinaObuce, email);
+	}
+	
+	public Integer prvoLogovanje(String email, Integer prviPut, String lozinka) {
+		return zaposleniRepository.setPrviPutForZaposleni(prviPut, lozinka, email);
+	}
+
+	
+	
 
 
 }

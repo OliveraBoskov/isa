@@ -29,6 +29,24 @@ angular.module('Model').factory('logovanjeService' , function logovanjeService($
 	
 	var aktivan = {};
 	
+	logovanjeService.prvoLogovanje = function(email, prviPut, novaLozinka){
+		return $http({
+			method: 'POST',
+			url: 'api/korisnik/prvoLogovanje/' + email + '/' + prviPut + '/' + novaLozinka
+		    
+		});
+		
+	}
+	
+	logovanjeService.promene = function(ime, prezime, konfBroj, velicinaObuce, email){
+		return $http({
+			method: 'POST',
+			url: 'api/korisnik/promene/' + ime + '/' + prezime + '/' + konfBroj + '/' + velicinaObuce + '/' + email
+		    
+		});
+	}
+	
+	
 	return logovanjeService;
 	
 
@@ -151,6 +169,28 @@ angular.module('Model').factory('registrovanjeKonobaraService' , function regist
 	
 	alert("dosla sam do servisa");
 	registrovanjeKonobaraService.registrovanjeKonobara = function(ime ,prezime, email, lozinka,datumRodjenja,konfBroj,velicinaObuce,restoran){
+		return $http({
+			method: 'POST',
+			url: 'api/zaposleni/zaposlen',
+			data: {
+				"ime" : ime,
+				"prezime" : prezime,
+				"email" : email,
+				"lozinka" : lozinka,
+				"restoran" : restoran,
+				"tip" : "konobar",
+				"prviPut" : true,
+				"datumRodjenja" : datumRodjenja,
+				"konfBroj" : konfBroj,
+				"velicinaObuce" : velicinaObuce
+				
+			}
+			
+		});
+	
+	}
+	
+	registrovanjeKonobaraService.izmenaKonobara = function(ime ,prezime, lozinka,datumRodjenja,konfBroj,velicinaObuce,restoran){
 		return $http({
 			method: 'POST',
 			url: 'api/zaposleni/zaposlen',

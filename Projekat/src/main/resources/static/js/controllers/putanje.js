@@ -73,6 +73,18 @@ con.config(function($routeProvider) {
      .when("/dodajMenadzeraSistema", {
         templateUrl : "views/menadzerSistema.html"
    })
+     .when("/kuvar", {
+        templateUrl : "views/kuvarPocetna.html"
+   })
+     .when("/konobar", {
+        templateUrl : "views/konobarPocetna.html"
+   })
+     .when("/sanker", {
+        templateUrl : "views/sankerPocetna.html"
+   })
+     .when("/ponudjac", {
+        templateUrl : "views/ponudjacPocetna.html"
+   })
    .when("/listaSaNamirnicama", {
         templateUrl : "views/listaSaNamirnicama.html"
         	

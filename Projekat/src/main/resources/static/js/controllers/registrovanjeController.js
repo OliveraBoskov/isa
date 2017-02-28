@@ -159,7 +159,7 @@ con.controller('registrovanjeSankeraController',['$scope','$location','registrov
 			alert(restoran);
 			
 			registrovanjeSankeraService.registrovanjeSankera(ime, prezime,email,lozinka,datumRodjenja,konfBroj,velicinaObuce,restoran).then(function(response){
-				alert("kreiran je kuvar");
+				alert("kreiran je sanker");
 				
 			});
 			

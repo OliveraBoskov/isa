@@ -68,7 +68,7 @@ public class ZaposleniController {
 	            method   = RequestMethod.POST,
 	            produces = MediaType.APPLICATION_JSON_VALUE
 	    )
-	    public ResponseEntity<Integer> prvoLogovanje(@PathVariable String email, @PathVariable Integer prviPut, @PathVariable String novaLozinka) {
+	    public ResponseEntity<Integer> prvoLogovanje(@PathVariable String email, @PathVariable Boolean prviPut, @PathVariable String novaLozinka) {
 			Integer i = zaposleniService.prvoLogovanje(email, prviPut, novaLozinka);
 	        return new ResponseEntity<Integer>(i, HttpStatus.OK);
 	    }

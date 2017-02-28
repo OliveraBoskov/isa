@@ -27,6 +27,6 @@ public interface ZaposleniRepository extends JpaRepository<Zaposleni, String> {
 	@Transactional
 	@Modifying
 	@Query("update Zaposleni z set z.prviPut = ?1, z.lozinka = ?2 where z.email = ?3")
-	public Integer setPrviPutForZaposleni(Integer prviPut, String lozinka, String email);
+	public Integer setPrviPutForZaposleni(Boolean prviPut, String lozinka, String email);
 	
 }

@@ -261,7 +261,7 @@ angular.module('Model').factory('registrovanjeSankeraService' , function registr
 				"email" : email,
 				"lozinka" : lozinka,
 				"restoran" : restoran,
-				"tip" : "kuvar",
+				"tip" : "sanker",
 				"prviPut" : true,
 				"datumRodjenja" : datumRodjenja,
 				"konfBroj" : konfBroj,

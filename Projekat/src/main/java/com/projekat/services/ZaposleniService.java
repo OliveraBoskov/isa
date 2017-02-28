@@ -48,7 +48,7 @@ public class ZaposleniService {
 		return zaposleniRepository.setImePrezimeKonfBrojVelicinaObuceForZaposleni(ime, prezime, konfBroj, velicinaObuce, email);
 	}
 	
-	public Integer prvoLogovanje(String email, Integer prviPut, String lozinka) {
+	public Integer prvoLogovanje(String email, Boolean prviPut, String lozinka) {
 		return zaposleniRepository.setPrviPutForZaposleni(prviPut, lozinka, email);
 	}
 

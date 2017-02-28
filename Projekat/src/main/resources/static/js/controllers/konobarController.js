@@ -59,7 +59,7 @@ $scope.izmeniPodatke = function(){
 	  						
 	  						registrovanjeMenadzeraService.aktivanZaposlen.lozinka = $scope.staraLozinka;
 
-	  						logovanjeService.prvoLogovanje(egistrovanjeMenadzeraService.aktivanZaposlen.email, 1, $scope.novaLozinka).then(function(response){
+	  						logovanjeService.prvoLogovanje(registrovanjeMenadzeraService.aktivanZaposlen.email, 1, $scope.novaLozinka).then(function(response){
 
 	  						});	
 
@@ -88,5 +88,45 @@ $scope.izmeniPodatke = function(){
 	  	}
 		
 	}
+
+
+if (registrovanjeMenadzeraService.aktivanZaposlen.prviPut == true) {
+	$mdDialog.show({
+    		controller: PrvoLogovanjeKontroler,
+    		templateUrl: '/views/dijalozi/prvoLogovanje.html',
+    		parent: angular.element(document.body),
+    		scope: $scope,
+    		preserveScope: true,
+    		clickOutsideToClose:false
+    	});
+	
+	function PrvoLogovanjeKontroler($scope, logovanjeService, $mdDialog, $route,registrovanjeMenadzeraService) {
+
+	  		$scope.apply = function(){	
+	  			if ($scope.staraLozinka == registrovanjeMenadzeraService.aktivanZaposlen.lozinka) {
+	  				if ($scope.novaLozinka == $scope.novaLozinka2) {
+	  					
+	  				var confirm = $mdDialog.confirm()
+	  		          				.textContent('Lozinka je promenjena!')
+	  		          				.ok('Ok');
+	  				
+	  				logovanjeService.prvoLogovanje(registrovanjeMenadzeraService.aktivanZaposlen.email, false, $scope.novaLozinka).then(function(response){
+	  			
+	  				});	
+	  				
+	  				registrovanjeMenadzeraService.aktivanZaposlen.prviPut = false;
+	  				
+	  				$mdDialog.show(confirm);
+	  				$mdDialog.hide();
+	  				$route.reload();
+	  				
+	  				}
+	  			}
+	  			
+	  		}
+	  		
+
+	  	}
+}
 	
 }]);

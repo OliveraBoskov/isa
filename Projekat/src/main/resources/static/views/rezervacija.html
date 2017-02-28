@@ -38,19 +38,7 @@
 	
 	<canvas id="canvas" width="500" height="450" style="border:1px solid #000000"></canvas>
   		
-  	<h1> Pozovite prijatelje </h1>
   	
-  	<md-select ng-model="selektovanPrijatelj" multiple="" placeholder="Pozovi prijatelja">
-          <md-optgroup label="Prijatelji">
-          	<md-option ng-value="prijateljstvo.secondUserFS" ng-repeat="prijatelj in prijateljstvo">{{prijatelj.secondUserFS.ime}} {{prijatelj.secondUserFS.prezime}}</md-option>
-          </md-optgroup>
-    </md-select>
-       
-     <div ng-repeat="p in selektovanPrijatelj">
-        <p style="color: white;">
-        	{{p.ime}} {{p.prezime}}
-        </p>
-     </div>
      
      <button class="md-raised md-primary" ng-click="dodajRezervaciju()">Kreiraj Rezervaciju</button>
      

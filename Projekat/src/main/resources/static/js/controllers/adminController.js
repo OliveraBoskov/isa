@@ -1,4 +1,4 @@
-con.controller('adminKontroler',['$scope','$location', function($scope,$location){
+con.controller('adminKontroler',['$scope','$location','logovanjeService', function($scope,$location,logovanjeService){
 	
 	$scope.dodajRestoran = function(){
 		alert("prva tacka");
@@ -7,4 +7,18 @@ con.controller('adminKontroler',['$scope','$location', function($scope,$location
 	$scope.dodajMenadzera = function(){
 		$location.path("/dodajMenadzera");
 	}
+	
+	$scope.menadzerSistema = false;
+	
+	if(logovanjeService.aktivan.email == "a@g.com"){
+		alert("aktivan email "+logovanjeService.aktivan.email);
+		$scope.menadzerSistema = true;
+		$scope.dodajMenadzeraSistema = function(){
+			
+			$location.path("/dodajMenadzeraSistema")
+		}
+	}
+	
+	
+	
 }]);

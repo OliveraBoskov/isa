@@ -32,10 +32,13 @@ con.controller('LogovanjeController',['$scope','$location','logovanjeService', f
 				
 			}else {
 				if(response.data.lozinka == $scope.lozinka){
+					logovanjeService.aktivan = response.data;
 					alert("poklapa se")	
 					if(response.data.tip == "admin"){
+						
 						$location.path("/adminPocetna");
 					}else{
+						
 						$location.path("/pocetnaGost");
 					}
 					

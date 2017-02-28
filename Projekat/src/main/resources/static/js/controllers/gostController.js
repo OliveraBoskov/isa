@@ -80,7 +80,7 @@ con.controller('rezervacijaKontroler',['$scope','$location','registRestoranServi
     
     var rezervisaniStolovi = [];
 	
-    $scope.getAllRestaurantTables = function(){
+    $scope.nadjiSveRestorane = function(){
     	drinkCategoryService.getAllDrinkCategories($scope.selectedRestaurant.id).then(function(response){
     		$scope.categories = response.data;
     	});

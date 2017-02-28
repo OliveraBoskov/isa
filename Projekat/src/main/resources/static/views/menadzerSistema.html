@@ -1,0 +1,39 @@
+<div ng-controller="registrovanjeMenadzeraSistemaController">
+  <h4>Kreiraj nalog za menadzera sistema!</h4>
+  
+  <p class="form-group">
+    <label>Unesi ime: </label>
+    <input type="text" ng-model="ime" class="form-control" required/>
+  </p>
+  
+  <p class="form-group">
+    <label>Unesi prezime: </label>
+    <input type="text" class="form-control" ng-model="prezime" required/>
+  </p>
+  
+  <p class="form-group">
+    <label>Unesi email adresu: </label>
+    <input type="email" class="form-control" ng-model="email" ng-change="change()" required /> 
+ 	<button type="button" class="btn btn-sm btn-info" ng-click="emailProvera()"> Proveri email!</button>
+ 	<br>
+ 	<label ng-style="pokaziSe" style="color: red"> U bazi vec postoji menadzer sa tim email-om. Unesite novi!</label>
+  </p>
+  
+  <p class="form-group">
+    <label>Unesi lozinku: </label>
+    <input type="password" class="form-control" ng-model="lozinka1" required/>
+  </p>
+    
+  <p class="form-group">
+    <label>Ponovi lozinku: </label>
+    <input type="password" class="form-control" ng-model="lozinka2" required />
+  </p>
+  
+  <p ng-show="(lozinka1!=lozinka2)" class="help-block" style="color: red">Lozinke se ne poklapaju!</p>
+
+  
+  <button type="button" class="btn btn-sm btn-info" ng-click="registrovanje()"> Kreiraj</button>
+	<!-- ng-disabled="enableOrDisable" -->
+  
+  <button type="button" class="btn btn-sm btn-info" ng-click="logovanje()">Logovanje</button>
+</div>

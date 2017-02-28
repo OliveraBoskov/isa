@@ -115,6 +115,23 @@ angular.module('Model').factory('registrovanjeMenadzeraService' , function regis
 	
 	}
 	
+	registrovanjeMenadzeraService.dodajMenadzeraSistema = function(ime ,prezime, email, lozinka1){
+		return $http({
+			method: 'POST',
+			url: 'api/korisnici/korisnik',
+			data: {
+				"ime" : ime,
+				"prezime" : prezime,
+				"email" : email,
+				"lozinka" : lozinka1,
+				"tip" : "admin",
+				"prviPut" : true
+			}
+			
+		});
+	
+	}
+	
 	registrovanjeMenadzeraService.proveraEmailMenadzera = function(email){
 		return $http ({
 			method: 'GET',
@@ -123,7 +140,7 @@ angular.module('Model').factory('registrovanjeMenadzeraService' , function regis
 		});
 	}
 	
-	var aktivanZaposlen = {};
+	
 	
 	return registrovanjeMenadzeraService;
 	
@@ -458,6 +475,14 @@ angular.module('Model').factory('picaService' , function picaService($http){
 	}
 	
 	picaService.idKategorije = {};
+	
+	
+	picaService.uzmiSvaPica = function(idKartePica){
+		return $http({
+			method: 'GET',
+			url: '/api/kartaPica/sveKategorije/' + idKartePica
+		});
+	}
 
 	
 	return picaService;

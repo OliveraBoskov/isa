@@ -191,3 +191,51 @@ con.controller('dodajPonudjacaController',['$scope','$location','registrovanjePo
 	
 
 }]);
+
+con.controller('registrovanjeMenadzeraSistemaController',['$scope','$location','registrovanjeMenadzeraService', function($scope,$location,registrovanjeMenadzeraService){
+	
+	alert("usla sam u kontroler");
+			
+			$scope.emailProvera = function(){
+				
+				var email = $scope.email;
+				
+				registrovanjeMenadzeraService.proveraEmailMenadzera(email).then(function(response){
+					
+					if(response.data == ''){
+						$scope.pokaziSe = {'visibility': 'hidden'};
+					}else if($scope.email == response.data.email){
+							alert("postiji takav m");
+							$scope.pokaziSe = {'visibility': 'visible'};
+						}
+					
+					
+				});
+			}
+	
+			
+			$scope.registrovanje = function(){
+				
+				var ime = $scope.ime;
+				var prezime = $scope.prezime;
+				var email = $scope.email;
+				var lozinka1 = $scope.lozinka1;
+				
+			
+				registrovanjeMenadzeraService.dodajMenadzeraSistema(ime,prezime, email, lozinka1).then(function(response){
+					alert("Uspesno je dodat menadzer");
+					$scope.ime = null;
+					$scope.prezime = null;
+					$scope.email = null;
+					$scope.lozinka1 = null; 
+					$scope.lozinka2 = null;
+				});
+
+			}	
+			
+			
+	
+	
+	
+
+}]);

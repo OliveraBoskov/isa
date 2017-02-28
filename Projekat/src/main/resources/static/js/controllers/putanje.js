@@ -70,6 +70,9 @@ con.config(function($routeProvider) {
     .when("/izlogujSe", {
         templateUrl : "views/loginZaSve.html"
    })
+     .when("/dodajMenadzeraSistema", {
+        templateUrl : "views/menadzerSistema.html"
+   })
    .when("/listaSaNamirnicama", {
         templateUrl : "views/listaSaNamirnicama.html"
         	

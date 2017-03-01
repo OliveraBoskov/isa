@@ -12,7 +12,7 @@
     	<input type="text" ng-model="nadjiPoTipu" class="form-control">
   	</p>	
   	
-  	<md-select ng-change="nadjiSveRestorane()" placeholder="Nadji restoran" ng-model="selektujRestoran" style="min-width: 200px; color: white;">
+  	<md-select ng-change="nadjiSveRestorane()" placeholder="Nadji restoran" ng-model="selektovaniRestoran" style="min-width: 200px; color: white;">
       		<md-option ng-value="restoran" ng-repeat="restoran in restorani">{{restoran.ime}} ({{restoran.tip}})</md-option>
 	</md-select>
 	<!-- (filteredRestaurants = restorani | filter:{ime:nadjiPoImenu} | filter:{tip:nadjiPoTipu})) -->
@@ -26,7 +26,7 @@
         </p>
     
     
-	<div uib-timepicker ng-model="vremeDolaskaVreme" ng-change="vremeDolaskaVreme()" hour-step="hstep" minute-step="mstep" show-meridian="false"></div>
+	<div uib-timepicker ng-model="vremeDolaskaVreme" ng-change="vremeDolaskaVremeChanged()" hour-step="hstep" minute-step="mstep" show-meridian="false"></div>
 		
 		
 	<p class="input-group">	
@@ -40,6 +40,6 @@
   		
   	
      
-     <button class="md-raised md-primary" ng-click="dodajRezervaciju()">Kreiraj Rezervaciju</button>
+     <button class="md-raised md-primary" ng-click="kreirajRezervaciju()">Kreiraj Rezervaciju</button>
      
  </div>

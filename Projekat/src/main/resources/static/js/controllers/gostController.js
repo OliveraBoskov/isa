@@ -31,7 +31,7 @@ con.controller('gostProfilKontroler',['$scope','$location','logovanjeService','$
 	$scope.prezime = logovanjeService.aktivan.prezime;
 	$scope.ime = logovanjeService.aktivan.ime;
 	
-$scope.izmeniPodatke = function(){
+	$scope.izmeniPodatke = function(){
 		
 		$mdDialog.show({
     		controller: IzmeniPodatkeGost,
@@ -116,10 +116,42 @@ $scope.izmeniPodatke = function(){
 }]);
 
 
-con.controller('rezervacijaKontroler',['$scope','$location','registRestoranService', function($scope,$location,registRestoranService){
+con.controller('rezervacijaKontroler',['$scope','$location','registRestoranService','dateFilter','kartaPicaService','stoService','$mdDialog','$route','rezervacijaService', 'logovanjeService', function($scope,$location,registRestoranService, dateFilter, kartaPicaService, stoService, $mdDialog, $route, rezervacijaService, logovanjeService){
+	
+	
+	$scope.kreirajRezervaciju = function() {
+		
+		var datum = dateFilter($scope.vremeDolaska, 'yyyy-MM-ddT');//dobar
+		var vreme = dateFilter($scope.vremeDolaskaVreme, 'HH:mm:00.000');
+		var zajedno = datum + vreme + 'Z';
+
+		var datumIVreme = new Date(zajedno);
+		var bpMomenat = moment(zajedno);
+		var kraj = moment(bpMomenat).add($scope.ostajemSati - 1, 'h').toDate();
+		var krajString = moment(kraj).format('YYYY-MM-DDTHH:mm:ss.sss')+'Z';
+		
+	
+		for (var i = 0; i < reservedTables.length; i++) {
+			
+			if (i == 0) {
+				
+				rezervacijaService.dodajRezervaciju(logovanjeService.aktivan.email, $scope.selektovaniRestoran.id, reservedTables[i], zajedno, krajString).then(function(response){
+					alert('Uspesno rezervisan sto!');					
+				});
+			}else {
+				rezervacijaService.dodajRezervaciju(logovanjeService.aktivan.email, $scope.selektovaniRestoran.id, reservedTables[i], zajedno, krajString).then(function(response){
+					alert('Uspesno rezervisan sto!');
+				});
+			}
+			
+			
+		}
+		
+		$route.reload();
+	}
+	
 	
 	registRestoranService.sviRestorani().then(function(response){
-		alert("svi restorani:" + response.data)
 		$scope.restorani = response.data;
 	});
 	
@@ -138,7 +170,7 @@ con.controller('rezervacijaKontroler',['$scope','$location','registRestoranServi
 	$scope.ostajemSati = 1;
 	
 	$scope.isVece = false;
-	$scope.vremeDolaskaVreme = function(){
+	$scope.vremeDolaskaVremeChanged = function(){
 		
 		var datum = dateFilter($scope.vremeDolaska, 'yyyy-MM-ddT');//dobar
 		var vreme = dateFilter($scope.vremeDolaskaVreme, 'HH:mm:00.000');
@@ -174,34 +206,38 @@ con.controller('rezervacijaKontroler',['$scope','$location','registRestoranServi
     
     var rezervisaniStolovi = [];
 	
+    $scope.tables = [];
+    var reservedTables = [];
+    
     $scope.nadjiSveRestorane = function(){
-    	drinkCategoryService.getAllDrinkCategories($scope.selectedRestaurant.id).then(function(response){
+    	kartaPicaService.sveKategorije($scope.selektovaniRestoran.id).then(function(response){
     		$scope.categories = response.data;
     	});
     	
-    	if ($scope.selectedRestaurant != undefined) {
-    		tableService.getAllRestaurantTables($scope.selectedRestaurant.id).then(function(response){
+    	if ($scope.selektovaniRestoran.id != undefined) {
+    		stoService.uzmiSveStolove($scope.selektovaniRestoran.id).then(function(response){
     			$scope.tables = response.data;
-    			console.log('Koliko stolova: '+$scope.tables.length);
+    			
     			for (var i = 0; i < $scope.tables.length; i++) {
     				
     				var color = {};
-    				if ($scope.tables[i].reon == 'inside'){
+    				if ($scope.tables[i].reon == 'unutra'){
     					color = 'red';
     				}
-    				else if ($scope.tables[i].reon == 'nonsmoking'){
+    				else if ($scope.tables[i].reon == 'zabranjenoPusenje'){
     					color = 'purple';
     				}
-    				else if ($scope.tables[i].reon == 'gardenclosed') {
+    				else if ($scope.tables[i].reon == 'otvorenaBasta') {
     					color = 'yellow';
     				}
-    				else if ($scope.tables[i].reon == 'gardenopened') {
+    				else if ($scope.tables[i].reon == 'zatvorenaBasta') {
     					color = 'green';
     				}
     				
+    				console.log(color);
     				
-    				var table = new fabric.Circle({ radius: 30, fill: color, originX: 'center', originY: 'center'});
-    		    	var text = new fabric.Text($scope.tables[i].number,{
+    				var table = new fabric.Rect({ height:80, width:80, fill: color, originX: 'center', originY: 'center'});
+    		    	var text = new fabric.Text($scope.tables[i].broj,{
     		    		fontFamily: 'Calibri',
     		    		fontSize: 25,
     		    		fill: 'white',
@@ -210,7 +246,7 @@ con.controller('rezervacijaKontroler',['$scope','$location','registRestoranServi
     		    	});
     		    	
     		    	var group = new fabric.Group([table, text],{
-    		    		top: $scope.tables[i].positionTop, left: $scope.tables[i].positionLeft,
+    		    		top: $scope.tables[i].gore, left: $scope.tables[i].levo,
     		    		lockMovementX: true,  lockMovementY: true, hasControls: false
     		    	});
     		    	
@@ -225,26 +261,20 @@ con.controller('rezervacijaKontroler',['$scope','$location','registRestoranServi
     		          
     		   		    	$mdDialog.show({
     		   		    		controller: TableReservationController,
-    		   		    		templateUrl: '/views/dialogs/tableReservationDialog.html',
+    		   		    		templateUrl: '/views/dijalozi/dijalogZaRezervaciju.html',
     		   		    		parent: angular.element(document.body),
-    		   		    		
-    		   		    		scope: $scope,//?
+    		   		    		scope: $scope,
     		   		    		preserveScope: true,
     		   		    		clickOutsideToClose:true,
-    		   		    		fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    		   		    	})
-    		   		    	.then(function(answer) {
-    		   		    		$scope.status = 'You said the information was "' + answer + '".';
-    		   		    	}, function() {
-    		   		    		$scope.status = 'You cancelled the dialog.';
+    		   		    		fullscreen: false 
     		   		    	});
     		   		  	
     		   		  	
     		   		  	
-    		   		  	function TableReservationController($scope, tableService, $mdDialog) {
+    		   		  	function TableReservationController($scope, stoService, $mdDialog) {
     					  
     		   		  		$scope.tableNumber = canvas.getActiveObject().item(1).get('text');
-    		   		  		$scope.idr = $scope.selectedRestaurant.ime;
+    		   		  		$scope.idr = $scope.selektovaniRestoran.ime;
     			 
     		   		  		$scope.apply = function(){
     		   		  			
@@ -259,10 +289,10 @@ con.controller('rezervacijaKontroler',['$scope','$location','registRestoranServi
     		   		  				return false;
     		   		  			}
     		   		  			
-    		   		  			tableService.getTableByRestaurantIdAndNumber($scope.selectedRestaurant.id, $scope.tableNumber+"").then(function(response){
+    		   		  			stoService.getStoByIdRestoranaAndBroj($scope.selektovaniRestoran.id, $scope.tableNumber+"").then(function(response){
     		   		  				
     		   		  				if(containsObject(response.data, reservedTables) == true) {
-    		   		  					alert('Already reserved');
+    		   		  					alert('Vec ste rezervisali sto');
     		   		  				}
     		   		  				else {
     		   		  					reservedTables.push(response.data);
@@ -285,7 +315,7 @@ con.controller('rezervacijaKontroler',['$scope','$location','registRestoranServi
     		    	
     		    	canvas.getObjects();
     		    	canvas.add(group);
-    		    	canvas.selection = true;
+    		    	canvas.selection = false;
     		        canvas.renderAll();
     		        canvas.calcOffset();
     		        
@@ -301,7 +331,6 @@ con.controller('listaRestoranaKontroler',['$scope','$location','registRestoranSe
 	
 	
 	registRestoranService.sviRestorani().then(function(response){
-		alert(response.data);
 		$scope.restorani = response.data;
 	});
 	

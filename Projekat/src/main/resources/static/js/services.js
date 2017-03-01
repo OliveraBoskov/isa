@@ -121,8 +121,7 @@ angular.module('Model').factory('registRestoranService' , function registRestora
 });
 
 angular.module('Model').factory('registrovanjeMenadzeraService' , function registrovanjeMenadzeraService($http){
-	
-	alert("dosla sam do servisa");
+
 	registrovanjeMenadzeraService.dodajMenadzera = function(ime ,prezime, email, lozinka1, restoran){
 		return $http({
 			method: 'POST',

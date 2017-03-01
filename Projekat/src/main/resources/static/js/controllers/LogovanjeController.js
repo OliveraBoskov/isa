@@ -17,8 +17,8 @@ con.controller('LogovanjeController',['$scope','$location','logovanjeService', f
 	$scope.logovanje = function(){
 		//alert("ajde");
 		
-	/*$scope.email = "a@g.com";
-	$scope.lozinka = "a";*/
+	$scope.email = "m@g.com";
+	$scope.lozinka = "m";
 		
 		var email = $scope.email;
 		var lozinka = $scope.lozinka;

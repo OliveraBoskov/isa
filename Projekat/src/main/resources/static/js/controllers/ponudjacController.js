@@ -2,7 +2,7 @@ con.controller('ponudjacPocetnaController',['$scope','$location','registrovanjeM
 
 	$scope.ime = registrovanjeMenadzeraService.aktivanZaposlen.ime;
 	
-$scope.izmeniPodatke = function(){
+	$scope.izmeniPodatke = function(){
 		
 		$mdDialog.show({
     		controller: IzmeniPodatkeKontroler,

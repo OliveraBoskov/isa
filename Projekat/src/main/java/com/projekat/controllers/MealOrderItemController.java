@@ -1,0 +1,60 @@
+package com.projekat.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.projekat.model.MealOrderItem;
+import com.projekat.model.MealOrderList;
+import com.projekat.services.MealOrderItemService;
+import com.projekat.services.MealOrderListService;
+
+
+@RestController
+public class MealOrderItemController {
+
+	@Autowired
+	private MealOrderItemService mealOrderItemService;
+	
+	@Autowired
+	private MealOrderListService mealOrderListService;
+	
+	@RequestMapping(
+            value    = "/api/mealOrder/addListItem/{id}",
+            method   = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<MealOrderItem> addGroceriesListItem(@RequestBody MealOrderItem doi, @PathVariable Integer id) {
+		MealOrderList dol = mealOrderListService.getById(id);
+		doi.setMealOrderList(dol);
+		MealOrderItem a = mealOrderItemService.add(doi);
+        return new ResponseEntity<MealOrderItem>(a, HttpStatus.OK);
+    }
+	
+	@RequestMapping(
+            value    = "/api/mealOrder/setPreparedForListItem/{id}/{prepared}",
+            method   = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Integer> setPreparedForListItem(@PathVariable Integer id, @PathVariable Boolean prepared) {
+		Integer a = mealOrderItemService.setPreparedForMealOrderItem(prepared, id);
+        return new ResponseEntity<Integer>(a, HttpStatus.OK);
+    }
+	
+	@RequestMapping(
+            value    = "/api/mealOrder/setPreparingForListItem/{id}/{preparing}",
+            method   = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Integer> setPreparingForListItem(@PathVariable Integer id, @PathVariable Boolean preparing) {
+		Integer a = mealOrderItemService.setPreparingForMealOrderItem(preparing, id);
+        return new ResponseEntity<Integer>(a, HttpStatus.OK);
+    }
+	
+}

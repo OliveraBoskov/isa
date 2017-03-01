@@ -31,13 +31,7 @@ public class KorisnikService{
 		
 	}
 
-
-   /* public Korisnik update(Korisnik user) {
-        Korisnik userPersistent = userRepository.findOne(user.getUserId());
-
-        if (userPersistent == null)
-            return null;
-
-        return userRepository.save(user);
-    }*/
+    public Integer promeneGost(String ime, String prezime, String email) {
+		return korisnikRepository.setImePrezimeForKorisnik(ime, prezime, email);
+	}
 }

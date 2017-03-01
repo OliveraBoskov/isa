@@ -1,1 +1,19 @@
-svi restorani
+<div ng-controller="listaRestoranaKontroler">
+<h1> LISTA RESTORANA</h1>
+<md-list ng-repeat = "restoran in restorani">
+ 		<md-subheader style=" bakgroung-color:grey; color:black" class="md-no-sticky"> {{restoran.ime}} 
+ 		
+ -{{restoran.tip}}
+ 		</md-subheader>
+ 			
+</md-list>
+
+<md-checkbox ng-model="sortIme" aria-label="Sortiraj po imenu" style="color: black;" ng-change="sortiraj()">       
+        		<b>Sortiraj po imenu!</b>
+    </md-checkbox>
+    <br>  
+    <md-checkbox ng-model="sortTip" aria-label="Sortiraj po tipu" style="color: black;" ng-change="sortiraj()">       
+        		<b>Sortiraj po tipu!</b>
+</md-checkbox>
+
+</div>

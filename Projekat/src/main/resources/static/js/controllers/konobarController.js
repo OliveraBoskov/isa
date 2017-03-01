@@ -128,5 +128,78 @@ if (registrovanjeMenadzeraService.aktivanZaposlen.prviPut == true) {
 
 	  	}
 }
+
+
+$scope.calendarView = 'month';
+$scope.viewDate = new Date();
+$scope.calendarTitle = "Schedule";
+$scope.eventClicked = function(calendarEvent){
+	
+}
+
+
+$scope.activeShift = function() {
+
+	var currentDateAndTime = new Date();
+	var curDateString = moment(currentDateAndTime).format('YYYY-MM-DDTHH:mm:ss.sss')+'Z';
+	
+
+	smenaService.nadjiSmenuZaZaposlenog(registrovanjeMenadzeraService.aktivanZaposlen.email, registrovanjeMenadzeraService.aktivanZaposlen.restoran, curDateString).then(function(response){
+
+		$scope.activeReon = response.data.reon;
+		console.log('Region: ' + response.data.reon);
+
+		stoService.uzmiSveStolove(registrovanjeMenadzeraService.aktivanZaposlen.restoran).then(function(response){
+			
+			$scope.tables = response.data;
+
+			var canvas = new fabric.Canvas('canvas');
+
+			for (var i = 0; i < $scope.tables.length; i++) {
+				var color = {};
+				if ($scope.tables[i].reon == $scope.activeReon){
+					color = 'green';
+				}
+				else {
+					color = 'red';
+				}
+			
+
+
+			var table = new fabric.Circle({ radius: 30, fill: color, originX: 'center', originY: 'center'});
+			var text = new fabric.Text($scope.tables[i].number+"",{
+				fontFamily: 'Calibri',
+				fontSize: 25,
+				fill: 'white',
+				originX: 'center',
+				originY: 'center'
+			});
+
+			var group = new fabric.Group([table, text],{
+				top: $scope.tables[i].positionTop, left: $scope.tables[i].positionLeft,
+				lockMovementX: true,  lockMovementY: true, hasControls: false
+			});
+
+			group.on('mousedown', function(e) {
+
+			});
+
+			canvas.getObjects();
+			canvas.add(group);
+			canvas.selection = false;
+			canvas.renderAll();
+			canvas.calcOffset();
+		}
+
+		});
+
+
+	});
+
+}
+
+
+
+
 	
 }]);

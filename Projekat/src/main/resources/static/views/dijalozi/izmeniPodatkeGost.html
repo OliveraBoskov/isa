@@ -1,0 +1,64 @@
+<md-dialog aria-label="">
+
+	<md-dialog-content>
+		<div class="md-dialog-content">
+
+		<h2 align="center"> Izmeni podatke!</h2>
+		
+		<form name='form1' ng-show="activeForm==1">
+		
+			<md-input-container class="md-block" flex-gt-sm>
+         		 <label>Ime:</label>
+          		 <input type="text" md-maxlength="30" required name="ime" ng-model="ime" />
+			</md-input-container>
+			
+			<md-input-container class="md-block" flex-gt-sm>
+         		 <label>Prezime:</label>
+          		 <input type="text" md-maxlength="30" required name="prezime" ng-model="prezime" />
+			</md-input-container>
+			
+		
+   		</form>
+
+		<form name='form2' ng-show="activeForm==2">
+		
+			<md-input-container class="md-block" flex-gt-sm>
+         		 <label>Stara lozinka:</label>
+          		 <input type="password" md-maxlength="30" required name="staraLozinka" ng-model="staraLozinka" />
+			</md-input-container>
+		
+      		<md-input-container class="md-block" flex-gt-sm>
+         		 <label>Nova lozinka:</label>
+          		 <input type="password" md-maxlength="30" required name="novaLozinka" ng-model="novaLozinka" />
+			</md-input-container>
+			
+
+			<md-input-container class="md-block" flex-gt-sm>
+          		<label>Ponovi novu lozniku:</label>
+          		<input type="password" md-maxlength="30" required name="novaLozinka2" ng-model="novaLozinka2" />
+			</md-input-container>
+   		</form>
+		
+
+		</div>
+	</md-dialog-content>
+
+	<md-dialog-actions layout="row">
+		<md-button class="md-raised md-primary" ng-click="potvrdi()" >
+       		Apply
+     	</md-button>
+     	
+     	<md-button class="md-raised md-primary" ng-click="cancel()" >
+       		Cancel
+     	</md-button>
+     	
+     	<md-button class="md-raised md-primary" ng-click="promeniLozinku()" ng-show="activeForm==1" >
+       		Change password
+     	</md-button>
+      
+     
+</md-dialog-actions>
+
+
+
+</md-dialog>

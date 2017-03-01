@@ -1,4 +1,7 @@
-con.controller('gostPocetnaKontroler',['$scope','$location', function($scope,$location){
+con.controller('gostPocetnaKontroler',['$scope','$location','logovanjeService', function($scope,$location,logovanjeService){
+	
+	$scope.ime = logovanjeService.aktivan.ime;
+	$scope.prezime = logovanjeService.aktivan.prezime;
 	
 	$('#kreirajRezervaciju').click(function(){
 		$location.path("/kreirajRezervaciju");
@@ -21,6 +24,97 @@ con.controller('gostPocetnaKontroler',['$scope','$location', function($scope,$lo
     });
 
 }]);
+
+
+con.controller('gostProfilKontroler',['$scope','$location','logovanjeService','$mdDialog','$route', function($scope,$location,logovanjeService,$mdDialog,$route){
+	
+	$scope.prezime = logovanjeService.aktivan.prezime;
+	$scope.ime = logovanjeService.aktivan.ime;
+	
+$scope.izmeniPodatke = function(){
+		
+		$mdDialog.show({
+    		controller: IzmeniPodatkeGost,
+    		templateUrl: '/views/dijalozi/izmeniPodatkeGost.html',
+    		parent: angular.element(document.body),
+    		scope: $scope,
+    		preserveScope: true,
+    		clickOutsideToClose:false
+    	});
+		
+		function IzmeniPodatkeGost($scope, logovanjeService, $mdDialog, $route) {
+			 
+			$scope.activeForm = 1;
+			if ($scope.activeForm == 1) {			
+				$scope.ime = logovanjeService.aktivan.ime;
+				$scope.prezime = logovanjeService.aktivan.prezime;
+				
+			}
+			
+	  		$scope.potvrdi = function(){	
+	  			
+	  			if ($scope.activeForm == 1) {
+	  				
+	  				logovanjeService.promeneGost($scope.ime, $scope.prezime,logovanjeService.aktivan.email).then(function(response){
+
+					});	
+	  					
+	  				logovanjeService.aktivan.ime = $scope.ime;
+	  				logovanjeService.aktivan.prezime = $scope.prezime;
+	  				
+					
+					var confirm = $mdDialog.confirm()
+						.textContent('Podaci su izmenjeni!')
+						.ok('Ok');
+					
+					$mdDialog.show(confirm);
+						$mdDialog.hide();
+						
+						$route.reload();
+	  				
+	  			}
+	  			
+	  			if ($scope.activeForm == 2) {
+
+	  				if ($scope.staraLozinka == logovanjeService.aktivan.lozinka) {
+	  					if ($scope.novaLozinka == $scope.novaLozinka2) {
+
+	  						var confirm = $mdDialog.confirm()
+	  						.textContent('Lozinka promenjena!')
+	  						.ok('Ok');
+	  						
+	  						logovanjeService.aktivan.lozinka = $scope.staraLozinka;
+
+
+	  						$mdDialog.show(confirm);
+	  						$mdDialog.hide();
+	  						$route.reload();
+
+	  					}
+	  				}	
+	  			}
+	  		}
+	  		
+	  		$scope.promeniLozinku = function(){
+	  			$scope.activeForm = 2;
+	  		}
+	  		
+	  		$scope.cancel = function(){
+	  			if ($scope.activeForm == 2) {
+	  				$scope.activeForm = 1;
+	  			}
+	  			else if ($scope.activeForm == 1) {
+	  				$mdDialog.cancel();
+	  			}
+	  		}
+	  		
+	  	}
+		
+	}
+	
+	
+}]);
+
 
 con.controller('rezervacijaKontroler',['$scope','$location','registRestoranService', function($scope,$location,registRestoranService){
 	
@@ -200,6 +294,30 @@ con.controller('rezervacijaKontroler',['$scope','$location','registRestoranServi
     	}
     	
     }
+
+}]);
+
+con.controller('listaRestoranaKontroler',['$scope','$location','registRestoranService','orderByFilter', function($scope,$location,registRestoranService,orderBy){
+	
+	
+	registRestoranService.sviRestorani().then(function(response){
+		alert(response.data);
+		$scope.restorani = response.data;
+	});
+	
+	$scope.sortiraj = function() {
+		if ($scope.sortIme == true && $scope.sortTip == true){
+			$scope.restorani = orderBy($scope.restorani, ['ime','tip']);
+		}
+		else if($scope.sortIme == true) {
+			$scope.restorani = orderBy($scope.restorani, 'ime');
+		}
+		else if ($scope.sortTip == true) {
+			$scope.restorani = orderBy($scope.restorani, 'tip');
+		}
+	 };
+	
+
 
 }]);
 

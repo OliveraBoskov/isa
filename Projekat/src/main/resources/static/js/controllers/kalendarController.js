@@ -7,7 +7,13 @@ con.controller('kalendarKontroler', ['$scope', 'registRestoranService', 'dateFil
 			var zavrsetakString = $scope.events[i].zavrsavaU;
 			var zavrsetakMoment = moment(zavrsetakString);
 			zavrsetak = moment(zavrsetakMoment).format('HH:mm');
-			$scope.events[i].naslov = zavrsetak + " " + $scope.events[i].zaposleni.ime 
+			
+			var pocetak = {};
+			var pocetakString = $scope.events[i].pocinjeU;
+			var pocetakMoment = moment(pocetakString);
+			pocetak = moment(pocetakMoment).format('HH:mm');
+			
+			$scope.events[i].title = pocetak + " - " + zavrsetak + " " + $scope.events[i].zaposleni.ime 
 			+ " " + $scope.events[i].zaposleni.prezime 
 			+ " (" + $scope.events[i].zaposleni.tip + ")" + " " + $scope.events[i].reon;
 			
@@ -43,10 +49,10 @@ con.controller('kalendarKontroler', ['$scope', 'registRestoranService', 'dateFil
 		
 		var pocetakSmeneMoment = moment(smenaPocetakString);
 		var krajSmeneDatum = moment(pocetakSmeneMoment).add($scope.smenaSati - 1, 'h').toDate();
-		var zavrsetakSMeneDratum = moment(krajSmeneDatum).format('YYYY-MM-DDTHH:mm:ss.sss')+'Z'; 
+		var zavrsetakSmeneDratum = moment(krajSmeneDatum).format('YYYY-MM-DDTHH:mm:ss.sss')+'Z'; 
 		
 		
-		smenaService.dodajSmenu(registRestoranService.aktivanRestoran.id, $scope.selektovanZaposleni, boja, reon, smenaPocetakString, zavrsetakSMeneDratum).then(function(response){
+		smenaService.dodajSmenu(registRestoranService.aktivanRestoran.id, $scope.selektovanZaposleni, boja, reon, smenaPocetakString, zavrsetakSmeneDratum).then(function(response){
 			alert('Shift added');
 		});
 		

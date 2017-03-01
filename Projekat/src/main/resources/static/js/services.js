@@ -46,6 +46,14 @@ angular.module('Model').factory('logovanjeService' , function logovanjeService($
 		});
 	}
 	
+	logovanjeService.promeneGost = function(ime, prezime,email){
+		return $http({
+			method: 'POST',
+			url: 'api/korisnik/promeneGost/' + ime + '/' + prezime + '/' + email
+		    
+		});
+	}
+	
 	
 	return logovanjeService;
 	
@@ -577,7 +585,7 @@ angular.module('Model').factory('smenaService' , function smenaService($http){
 				"boja" : boja,
 				"reon" : reon,
 				"pocinjeU" : pocinjeU,
-				"zavrsavaSe" : zavrsavaSe			
+				"zavrsavaU" : zavrsavaSe			
 			}
 			
 		});
@@ -590,9 +598,25 @@ angular.module('Model').factory('smenaService' , function smenaService($http){
 		});
 	}
 	
+
+	smenaService.nadjiSmenuZaZaposlenog = function(email, restoranId){
+		return $http ({
+			method: 'GET',
+			url: 'api/smena/nadjiSmenuZaZaposlenog/' + email + '/' + restoranId
+		});
+	}
+
+	smenaService.nadjiAktivnuSmenu = function(email, restoranId, vreme){
+		return $http ({
+			method: 'GET',
+			url: 'api/smena/nadjiAktivnuSmenu/' + email + '/' + restoranId  + '/' + vreme
+		});
+	}
+	
 	return smenaService;
 	
 });
+
 
 
 angular.module('Model').factory('namirniceService' , function namirniceService($http){

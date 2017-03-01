@@ -343,6 +343,17 @@ angular.module('Model').factory('jelovnikService' , function jelovnikService($ht
 		
 	}
 	
+	
+	jelovnikService.svaJela = function() {
+		
+		return $http ({
+			method: 'GET',
+			url: 'api/jelovnik/svaJela'
+			
+		});
+		
+	}
+	
 	return jelovnikService;
 });
 
@@ -531,6 +542,13 @@ angular.module('Model').factory('picaService' , function picaService($http){
 			url: '/api/kartaPica/sveKategorije/' + idKartePica
 		});
 	}
+	
+	picaService.svaPica = function(){
+		return $http({
+			method: 'GET',
+			url: '/api/kartaPica/svaPica' 
+		});
+	}
 
 	
 	return picaService;
@@ -640,10 +658,10 @@ angular.module('Model').factory('namirniceService' , function namirniceService($
 		});
 	}
 	
-	namirniceService.getListeByPocinjeU = function(pocinjeU){
+	namirniceService.getListaByPocinjeU = function(pocinjeU){
 		return $http({
 			method: 'GET',
-			url: 'api/namirnice/getListeByPocinjeU/'+pocinjeU
+			url: 'api/namirnice/getListaByPocinjeU/'+pocinjeU
 		});
 	}
 	
@@ -746,6 +764,46 @@ angular.module('Model').factory('rezervacijaService' , function rezervacijaServi
 	}
 	
 	return rezervacijaService;
+});
+
+
+angular.module('Model').factory('ponudaService' , function ponudaService($http){
+	
+	ponudaService.dodajPonudu = function(price, deliveryDate, bidder, gl, warranty){
+		return $http({
+			method: 'POST',
+			url: 'api/ponuda/dodajPonudu/'+gl.id,
+			data: {
+				"id" : null,
+				"cena": price,
+				"datumIsoruke" : deliveryDate,
+				"ponudjac" : bidder, 
+				"nl" : gl ,
+				"garancija" : warranty,
+				"prihvaceno" : false
+			}
+			
+		});
+	}
+	
+	ponudaService.updateOffer = function(price, bpTime, warranty, offerId){
+		return $http({
+			method: 'POST',
+			url: 'api/ponuda/updatePonuda/'+ price + '/' + bpTime + '/' + warranty + '/' + offerId
+		});
+	}
+	
+	
+	ponudaService.acceptOffer = function(offerId){
+		return $http({
+			method: 'POST',
+			url: 'api/ponuda/ponudaPrihvacena/'+offerId,
+		});
+	}
+	
+	
+	return ponudaService;
+	
 });
 
 

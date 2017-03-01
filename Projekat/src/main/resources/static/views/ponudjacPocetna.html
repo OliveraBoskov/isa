@@ -10,5 +10,58 @@
 <button type="button" class="btn btn-sm btn-info" ng-click="izmeniPodatke()"> Izmeni</button>
 <br>
 
+
+<div layout = "row">
+		
+		<div flex = 50>
+	
+   		 <md-list ng-repeat="list in (filteredLists = (lists | filter:{aktivna:true}))">
+ 			<md-subheader style="color:black" class="md-no-sticky"> {{list.listaIme}} 
+ 		
+ 			</md-subheader>
+ 			
+ 			<md-list-item ng-repeat="item in list.items" ng-click="goToRestaurant(restaurant, $event)" class="noright">
+    			<p style="color:black"> {{item.namirnica.imeNamirnice}} {{item.kolicina}}</p>
+    		
+  			</md-list-item>
+ 		
+ 		</md-list>
+ 		
+ 		</div>
+   			
+   		
+		<div flex = 50>
+			<lable> Odaberi porudzbinu:</lable>
+			<md-select ng-change="" placeholder="" ng-model="selectedList" style="min-width: 200px; color: black;">
+      			<md-option ng-value="list" ng-repeat="list in (filteredLists = (lists | filter:{aktivna:true})) ">{{list.listaIme}}</md-option>
+			</md-select>
+	
+			<p class="input-group">	
+				<label style="color: black"> Cena: </label>
+				<input type="number" class="form-control" ng-model="price" min="1">
+			</p>
+	
+			<label style="color: black"> Datum isporuke </label>
+				<p class="input-group" style="width: 150"> 	
+          			<input type="text" class="form-control" uib-datepicker-popup ng-model="deliveryDate" is-open="deliveryDateOpened" ng-changed="" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+          			<span class="input-group-btn">
+            		<button type="button" class="btn btn-default" ng-click="openDeliveryDate()"><i class="glyphicon glyphicon-calendar"></i></button>
+          			</span>
+        		</p>
+        
+		 	<div uib-timepicker ng-model="deliveryTime" ng-change="deliveryTimeChanged()" hour-step="hstep" minute-step="mstep" show-meridian="false"></div>
+		
+			<div>
+   				<md-checkbox ng-model="warranty" aria-label="Warranty" style="color: black;">       
+        			Nudis garanciju? 
+       	 		</md-checkbox>
+			</div>
+		
+			<md-button class="md-raised md-primary" ng-click="confirmOffer()">Posalji ponudu </md-button>
+			
+			</div>
+			
+		</div>
+
 	
 </div>

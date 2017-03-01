@@ -1,4 +1,4 @@
-con.controller('ponudjacPocetnaController',['$scope','$location','registrovanjeMenadzeraService','logovanjeService','$mdDialog','$route', function($scope,$location,registrovanjeMenadzeraService,logovanjeService,$mdDialog,$route){
+con.controller('ponudjacPocetnaController',['$scope','$location','registrovanjeMenadzeraService','logovanjeService','$mdDialog','$route','namirniceService','dateFilter','ponudaService', function($scope,$location,registrovanjeMenadzeraService,logovanjeService,$mdDialog,$route,namirniceService,dateFilter,ponudaService){
 
 	$scope.ime = registrovanjeMenadzeraService.aktivanZaposlen.ime;
 	
@@ -88,5 +88,49 @@ $scope.izmeniPodatke = function(){
 	  	}
 		
 	}
+
+//PONUDE
+
+
+	$scope.price = 1;
+	$scope.deliveryDate = new Date();
+	$scope.deliveryDateOpened = false;
+
+	$scope.openDeliveryDate = function() {
+    $scope.deliveryDateOpened = true;
+};
+
+
+	$scope.deliveryTime = new Date();
+	$scope.deliveryTime.setHours(10);
+	$scope.deliveryTime.setMinutes(0);
+
+		$scope.hstep = 1;
+		$scope.mstep = 30;
+
+		
+		
+		var currentDateAndTime = new Date();
+		var curDateString = moment(currentDateAndTime).format('YYYY-MM-DDTHH:mm:ss.sss')+'Z';
+
+		namirniceService.getListaByPocinjeU(curDateString).then(function(response){
+			alert(response.data);
+				$scope.lists = response.data;
+		});	
+		
+		
+		
+		$scope.confirmOffer = function(){
+			
+			var dateString = dateFilter($scope.deliveryDate, 'yyyy-MM-ddT');
+			var timeString = dateFilter($scope.deliveryTime, 'HH:mm:00.000');
+			var bpTime = dateString + timeString + 'Z';
+			
+	   ponudaService.dodajPonudu($scope.price, bpTime, registrovanjeMenadzeraService.aktivanZaposlen, $scope.selectedList, $scope.warranty).then(function(response){
+				
+			});
+			
+   	  $route.reload();
+		}
 	
 }]);

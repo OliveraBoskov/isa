@@ -64,5 +64,15 @@ public class JeloController {
 		Jelo dodajJelo = jeloService.update(jelo);
         return new ResponseEntity<Jelo>(dodajJelo, HttpStatus.OK);
     }
+	
+	@RequestMapping(
+            value    = "/api/jelovnik/svaJela",
+            method   = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Collection<Jelo>> svaJela() {
+		Collection<Jelo> svaJela= jeloService.findAll();
+        return new ResponseEntity<Collection<Jelo>>(svaJela, HttpStatus.OK);
+    }
 
 }

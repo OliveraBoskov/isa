@@ -67,4 +67,13 @@ public class PiceController {
         return new ResponseEntity<Pice>(dodajPice, HttpStatus.OK);
     }
 
+	@RequestMapping(
+            value    = "/api/kartaPica/svaPica",
+            method   = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Collection<Pice>> svaPica() {
+		Collection<Pice> svaPica= piceService.findAll();
+        return new ResponseEntity<Collection<Pice>>(svaPica, HttpStatus.OK);
+    }
 }

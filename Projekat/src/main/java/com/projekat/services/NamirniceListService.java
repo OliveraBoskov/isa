@@ -28,8 +28,8 @@ public class NamirniceListService {
 		return namirnicaLIstRepository.findOne(id);
 	}
 
-	public Collection<NamirniceLista> getAllOngoingLists(String startingTime) {
-		return namirnicaLIstRepository.findByZavrsavaUGreaterThan(startingTime);
+	public Collection<NamirniceLista> getAllOngoingLists(String pocinjeU) {
+		return namirnicaLIstRepository.findByZavrsavaUGreaterThan(pocinjeU);
 	}
 
 	public Integer setAktivnaToFalse(boolean b, Integer id) {

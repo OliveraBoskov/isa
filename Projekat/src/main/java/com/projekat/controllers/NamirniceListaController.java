@@ -44,12 +44,12 @@ public class NamirniceListaController {
     }
 	
 	@RequestMapping(
-            value    = "/api/namirnice/getListeByPocinjeU/{pocinjeU}",
+            value    = "/api/namirnice/getListaByPocinjeU/{pocinjeU}",
             method   = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Collection<NamirniceLista>> getListsByStartingTime(@PathVariable String startingTime) {
-		Collection<NamirniceLista> groceriesLists = namirniceListService.getAllOngoingLists(startingTime);
+    public ResponseEntity<Collection<NamirniceLista>> getListaByPocinjeU(@PathVariable String pocinjeU) {
+		Collection<NamirniceLista> groceriesLists = namirniceListService.getAllOngoingLists(pocinjeU);
         return new ResponseEntity<Collection<NamirniceLista>>(groceriesLists, HttpStatus.OK);
     }
 	
